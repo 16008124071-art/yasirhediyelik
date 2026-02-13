@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yasir Hediyelik</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #fdfdfd; }
+        
+        /* Buton geçişleri için stil */
+        .category-btn {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="pb-10">
+
+    <header class="bg-white sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+        <div class="max-w-screen-xl mx-auto px-4 py-5 flex justify-center">
+            <h1 class="text-xl font-bold tracking-wide text-gray-900 uppercase">Yasir Hediyelik</h1>
+        </div>
+    </header>
+
+    <div class="max-w-screen-xl mx-auto px-4 mt-6 mb-8">
+        <div class="flex justify-center gap-4">
+            <button onclick="setCategory('cicek')" id="btn-cicek" class="category-btn px-6 py-2 rounded-full font-medium text-sm bg-gray-900 text-white shadow-md">
+                Çiçekler
+            </button>
+            <button onclick="setCategory('hediye')" id="btn-hediye" class="category-btn px-6 py-2 rounded-full font-medium text-sm bg-white text-gray-600 border border-gray-200 hover:bg-gray-50">
+                Hediyelikler
+            </button>
+        </div>
+    </div>
+
+    <div class="max-w-screen-xl mx-auto px-4">
+        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8">
+            </div>
+    </div>
+
+    <script>
+        // ÜRÜN LİSTESİ
+        // Her ürüne "category" özelliği ekledik: 'cicek' veya 'hediye'
+        
+        const products = [
+            // --- ÇİÇEKLER KATEGORİSİ ---
+            { id: 1, category: 'cicek', title: "6'lı Karışık Mavi Vazoda Çiçek", price: 900, image: "irem/1.jpeg" },
+            { id: 2, category: 'cicek', title: "7'li Karışık Mavi Vazoda Çiçek", price: 1000, image: "irem/2.jpeg" },
+            { id: 3, category: 'cicek', title: "8'li Karışık Mavi Vazoda Çiçek", price: 1100, image: "irem/3.jpeg" },
+            { id: 4, category: 'cicek', title: "6'lı Karışık Krem Vazoda Çiçek", price: 900, image: "irem/4.jpeg" },
+            { id: 5, category: 'cicek', title: "6'lı Karışık Krem Vazoda Çiçek", price: 900, image: "irem/5.jpeg" },
+            { id: 6, category: 'cicek', title: "6'lı Karışık Krem Vazoda Çiçek", price: 900, image: "irem/6.jpeg" },
+            { id: 7, category: 'cicek', title: "7'li Karışık Krem Vazoda Çiçek", price: 900, image: "irem/7.jpeg" },
+            { id: 8, category: 'cicek', title: "7'li Pembe Vazoda Çiçek", price: 1000, image: "irem/8.jpeg" },
+            { id: 9, category: 'cicek', title: "7'li Mor Vazoda Çiçek", price: 1000, image: "irem/9.jpeg" },
+            { id: 10, category: 'cicek', title: "7'li Lila Karışık Vazoda Çiçek", price: 1000, image: "irem/10.jpeg" },
+            { id: 11, category: 'cicek', title: "Beyaz Lale Vazoda Çiçek", price: 900, image: "irem/11.jpeg" },
+            { id: 12, category: 'cicek', title: "Kırmızı Buket Çiçek", price: 650, image: "irem/12.jpeg" },
+{ id: 13, category: 'cicek', title: "Kırmızı Buket Çiçek", price: 650, image: "irem/13.jpeg" },
+{ id: 14, category: 'cicek', title: "Kırmızı Buket Çiçek", price: 650, image: "irem/14.jpeg" },
+{ id: 15, category: 'cicek', title: "Lila Buket Çiçek", price: 650, image: "irem/15.jpeg" },
+{ id: 16, category: 'cicek', title: "Lila Buket Çiçek", price: 650, image: "irem/16.jpeg" },
+{ id: 17, category: 'cicek', title: "Pembe Buket Çiçek", price: 650, image: "irem/17.jpeg" },
+{ id: 18, category: 'cicek', title: "Mor Buket Çiçek", price: 650, image: "irem/18.jpeg" },
+{ id: 19, category: 'cicek', title: "Kahverengi Karışık Buket Çiçek", price: 650, image: "irem/19.jpeg" },
+{ id: 20, category: 'cicek', title: "6'lı Pembe Buket Çiçek", price: 900, image: "irem/20.jpeg" },
+{ id: 21, category: 'cicek', title: "6'lı Mavi Karışık Buket Çiçek", price: 900, image: "irem/21.jpeg" },
+{ id: 22, category: 'cicek', title: "6'lı Karışık Kırmızı Buket Çiçek", price: 900, image: "irem/22.jpeg" },
+{ id: 23, category: 'cicek', title: "6'lı Karışık Kırmızı Buket Çiçek", price: 900, image: "irem/23.jpeg" },
+{ id: 24, category: 'cicek', title: "6'lı Mavi Karışık Buket Çiçek", price: 900, image: "irem/24.jpeg" },
+{ id: 25, category: 'cicek', title: "6'lı Mavi Karışık Buket Çiçek", price: 900, image: "irem/25.jpeg" },
+
+{ id: 26, category: 'cicek', title: "Pembe Buket Çiçek", price: 800, image: "irem/26.jpeg" },
+
+{ id: 27, category: 'cicek', title: "6'lı Mavi Karışık Buket Çiçek", price: 900, image: "irem/27.jpeg" },
+
+{ id: 28, category: 'cicek', title: "Krem Buket Çiçek", price: 800, image: "irem/28.jpeg" },
+
+{ id: 29, category: 'cicek', title: "Pembe Mor Karışık Vazoda Çiçek", price: 1000, image: "irem/29.jpeg" },
+
+
+
+            // --- HEDİYELİKLER KATEGORİSİ (Örnekler) ---
+                       { 
+                id: 101, 
+                category: 'hediye', 
+                title: "yasin ve tesbih", 
+                price: 40, 
+                image: "irem/h1.jpeg" 
+            },
+            { 
+                id: 102, 
+                category: 'hediye', 
+                title: "Kırmızı Başörtüsü, Tesbih, Zikirmatik, Şeffaf çanta", 
+                price: 150, 
+                image: "irem/h2.jpeg" 
+            },
+{ 
+                id: 103, 
+                category: 'hediye', 
+                title: "Lacivert Başörtüsü, Tesbih, Zikirmatik, Şeffaf çanta", 
+                price: 150, 
+                image: "irem/h3.jpeg" 
+            },
+{ 
+                id: 104, 
+                category: 'hediye', 
+                title: "Pembe Başörtüsü, Tesbih, Zikirmatik, Şeffaf çanta", 
+                price: 150, 
+                image: "irem/h4.jpeg" 
+            },
+{ 
+                id: 105, 
+                category: 'hediye', 
+                title: "Krem Başörtüsü, Tesbih, Zikirmatik, Şeffaf çanta", 
+                price: 150, 
+                image: "irem/h5.jpeg" 
+            },
+{ 
+                id: 106, 
+                category: 'hediye', 
+                title: " Mor Başörtüsü, Tesbih, Zikirmatik, Şeffaf çanta", 
+                price: 150, 
+                image: "irem/h6.jpeg" 
+            },
+{ 
+                id: 107, 
+                category: 'hediye', 
+                title: "Yeşil Başörtüsü, Tesbih, Zikirmatik, Şeffaf çanta", 
+                price: 150, 
+                image: "irem/h7.jpeg" 
+            },
+{ 
+                id: 108, 
+                category: 'hediye', 
+                title: "Mavi Başörtüsü, Tesbih, Zikirmatik, Şeffaf çanta", 
+                price: 150, 
+                image: "irem/h8.jpeg" 
+            },
+
+        ];
+
+        const grid = document.getElementById('product-grid');
+        const btnCicek = document.getElementById('btn-cicek');
+        const btnHediye = document.getElementById('btn-hediye');
+
+        // Kategori Değiştirme Fonksiyonu
+        function setCategory(categoryName) {
+            // Önce gridi temizle
+            grid.innerHTML = '';
+
+            // Seçilen kategorideki ürünleri filtrele
+            const filteredProducts = products.filter(p => p.category === categoryName);
+
+            // Eğer o kategoride ürün yoksa mesaj göster
+            if (filteredProducts.length === 0) {
+                grid.innerHTML = '<div class="col-span-2 md:col-span-3 lg:col-span-4 text-center text-gray-400 py-10">Bu kategoride henüz ürün yok.</div>';
+            } else {
+                // Ürünleri ekrana bas
+                filteredProducts.forEach(product => {
+                    const card = `
+                        <div class="group cursor-pointer">
+                            <div class="relative overflow-hidden rounded-lg aspect-[4/5] bg-gray-100 mb-3 border border-gray-200">
+                                <img src="${product.image}" 
+                                     alt="${product.title}" 
+                                     onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'flex items-center justify-center h-full text-xs text-red-500 font-bold p-2 text-center\'>Resim Yok</div>';"
+                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                            <div class="space-y-1">
+                                <h3 class="text-gray-800 text-sm font-normal leading-tight line-clamp-2">${product.title}</h3>
+                                <p class="text-gray-900 font-semibold text-base">${product.price.toLocaleString('tr-TR')} TL</p>
+                            </div>
+                        </div>
+                    `;
+                    grid.innerHTML += card;
+                });
+            }
+
+            // Buton renklerini güncelle
+            if (categoryName === 'cicek') {
+                btnCicek.className = "category-btn px-6 py-2 rounded-full font-medium text-sm bg-gray-900 text-white shadow-md";
+                btnHediye.className = "category-btn px-6 py-2 rounded-full font-medium text-sm bg-white text-gray-600 border border-gray-200 hover:bg-gray-50";
+            } else {
+                btnHediye.className = "category-btn px-6 py-2 rounded-full font-medium text-sm bg-gray-900 text-white shadow-md";
+                btnCicek.className = "category-btn px-6 py-2 rounded-full font-medium text-sm bg-white text-gray-600 border border-gray-200 hover:bg-gray-50";
+            }
+        }
+
+        // Sayfa ilk açıldığında Çiçekler kategorisi gelsin
+        setCategory('cicek');
+
+    </script>
+</body>
+</html>
